@@ -1,70 +1,68 @@
-#This is flowbeats platform ;)
+# FLOW BEATS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Are you tired of playing games that don't pay off? Well, with Flow Beats, you can finally put the "play" in "pay-to-play"!
 
-## Available Scripts
+So, get ready to dive into Flow Beats, the ultimate multi-gaming platform built on Flow!
+Our P2E (Play-to-Earn) model and in-game rewards system is designed to help you earn valuable rewards while playing your favourite games.
 
-In the project directory, you can run:
+By using Flow Beats, you can enjoy a wide variety of games all in one place. Whether you're into indie games, or casual puzzle games, we've got something for everyone. And with our in-game rewards system, you'll be able to earn valuable rewards that can be redeemed for real-world value.
 
-### `npm start`
+But what really sets us apart is our easy onboarding process. Flow Beats leveraged the Niftory's wallet and NFT API, which includes Niftory's social login and add or switch wallet feature. This means you can easily create and manage digital assets directly within the game interface, without the need for a separate wallet. We've eliminated the complexity and friction associated with blockchain transactions, making it easier for you to engage with our games and earn valuable rewards.
+You can also buy and sell your digital assets directly from the platform.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Flow Beats makes it easy for you to find the games you love and earn rewards while doing it. It's literary just
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Wake Up 2. Play 3. Eat 4. Sleep 5. Repeat.
+So whether you're a hardcore gamer or just looking for a casual gaming experience, Flow Beats has something for everyone.
 
-### `npm test`
+## Usage
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Configuration
 
-### `npm run build`
+This app uses [dotenv](https://github.com/motdotla/dotenv) for configuration, so you can set your app's environment variables by creating a `.env` file in this directory.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+See [.env.example](./.env.example) for an example of how to configure these environment variables.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Installing Dependencies
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To install the dependencies of this app.
 
-### `npm run eject`
+```
+yarn install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Running the app
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Once your `.env` file is set up, you can run the app locally with:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+yarn dev
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Overview
 
-## Learn More
+### Stack:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Web framework: [Next.js](https://nextjs.org/)
+- Auth framework: [NextAuth](https://next-auth.js.org/)
+- Graph QL Client: [graphql-request](https://github.com/prisma-labs/graphql-request)
+- React state management: [urql](https://formidable.com/open-source/urql/) and [SWR](https://swr.vercel.app/docs/with-nextjs)
+- GraphQL codegen: [graphql-codeg-generator](https://www.graphql-code-generator.com/)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Authentication
 
-### Code Splitting
+This app demonstrates three forms of authentication in the Niftory API.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+#### User authentication
 
-### Analyzing the Bundle Size
+We use [NextAuth](https://next-auth.js.org/) to manage user sessions in this app.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+[Our configuration](pages/api/auth/[...nextauth].ts) uses Niftory as the only OAuth provider and saves the user's Niftory token in the session.
 
-### Making a Progressive Web App
+The browser's [GraphQL client](src/components/GraphQLClientProvider.tsx) then includes that token in every request to the Niftory API as a bearer token in the `Authorization` header
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#### App Credentials authentication using NextJS API routes or in your backend.
 
-### Advanced Configuration
+If you want to make requests using the app's credentials instead of the User's credentials for performing admin only tasks then that can be done using the [Serverside GraphQL Client](src/graphql/getClientForServer.ts).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Note - This client should not be used in the frontend, it should either be used in the backend of your app or in the [NextJS API Routes](https://nextjs.org/docs/api-routes/introduction). 
