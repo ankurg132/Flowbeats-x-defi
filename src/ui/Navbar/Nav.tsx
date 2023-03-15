@@ -80,6 +80,23 @@ export const Navbar = ({ onOpen }) => {
           ),
         },
         {
+          href: "/app/bridge",
+          component: (
+            <Link href="/app/bridge" passHref>
+              <Box
+                fontWeight="bold"
+                display="flex"
+                alignItems="center"
+                color="content.400"
+                cursor="pointer"
+                gap="0.3rem"
+              >
+                <div style={{ color: "white" }}>Bridge</div>
+              </Box>
+            </Link>
+          ),
+        },
+        {
           title: "New Collection",
           href: "/",
           component: (

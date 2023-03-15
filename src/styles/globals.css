@@ -57,6 +57,39 @@ a {
   display: none;
 }
 
+input[type="text"] {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  margin-bottom: 12px;
+  background-color: #333;
+  color: #fff;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #3e8e41;
+}
+
+label {
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+p {
+  color: #fff;
+}
 
 
 
